@@ -1,0 +1,246 @@
+@import "tailwindcss";
+
+/* next-themes applies the .dark class to <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* Emerald green — primary brand */
+  --brand-50: #ecfdf5;
+  --brand-100: #d1fae5;
+  --brand-200: #a7f3d0;
+  --brand-300: #6ee7b7;
+  --brand-400: #34d399;
+  --brand-500: #10b981;
+  --brand-600: #059669;
+  --brand-700: #047857;
+  --brand-800: #065f46;
+
+  /* Deep navy — accent and dark surface */
+  --navy-950: #061626;
+  --navy-900: #0a1f33;
+  --navy-800: #102a43;
+  --navy-700: #1b3a5b;
+
+  /* Crisp white / soft neutrals */
+  --white: #ffffff;
+  --neutral-50: #f8fafc;
+  --neutral-100: #f1f5f9;
+  --neutral-200: #e2e8f0;
+  --neutral-500: #64748b;
+  --neutral-700: #334155;
+
+  /* Semantic tokens */
+  --surface: var(--white);
+  --surface-muted: var(--neutral-50);
+  --surface-raised: var(--white);
+  --foreground: var(--navy-900);
+  --muted-foreground: #52637a;
+  --border: var(--neutral-200);
+  --primary: var(--brand-600);
+  --primary-hover: var(--brand-700);
+  --primary-soft: var(--brand-50);
+  --primary-foreground: var(--white);
+  --accent: var(--navy-900);
+  --accent-hover: var(--navy-800);
+  --accent-foreground: var(--white);
+  --ring: var(--brand-500);
+  --shadow-card: 0 10px 30px -18px rgba(6, 22, 38, 0.35);
+
+  /* shadcn/ui semantic tokens (aliases of the brand palette above) */
+  --background: var(--surface);
+  --card: var(--surface-raised);
+  --card-foreground: var(--foreground);
+  --popover: var(--surface-raised);
+  --popover-foreground: var(--foreground);
+  --secondary: var(--surface-muted);
+  --secondary-foreground: var(--foreground);
+  --destructive: #dc2626;
+  --input: var(--border);
+  --radius: 1rem;
+}
+
+.dark {
+  --surface: var(--navy-950);
+  --surface-muted: var(--navy-900);
+  --surface-raised: var(--navy-800);
+  --foreground: var(--neutral-50);
+  --muted-foreground: #a9bdd0;
+  --border: #1e3a52;
+  --primary: var(--brand-400);
+  --primary-hover: var(--brand-300);
+  --primary-soft: #063326;
+  --primary-foreground: var(--navy-950);
+  --accent: var(--brand-400);
+  --accent-hover: var(--brand-300);
+  --accent-foreground: var(--navy-950);
+  --ring: var(--brand-400);
+  --shadow-card: 0 16px 40px -24px rgba(0, 0, 0, 0.75);
+}
+
+@theme inline {
+  --color-brand-50: var(--brand-50);
+  --color-brand-100: var(--brand-100);
+  --color-brand-200: var(--brand-200);
+  --color-brand-300: var(--brand-300);
+  --color-brand-400: var(--brand-400);
+  --color-brand-500: var(--brand-500);
+  --color-brand-600: var(--brand-600);
+  --color-brand-700: var(--brand-700);
+  --color-brand-800: var(--brand-800);
+  --color-navy-950: var(--navy-950);
+  --color-navy-900: var(--navy-900);
+  --color-navy-800: var(--navy-800);
+  --color-navy-700: var(--navy-700);
+
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-raised: var(--surface-raised);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted-foreground);
+  --color-line: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-soft: var(--primary-soft);
+  --color-accent: var(--accent);
+
+  --color-background: var(--background);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-destructive: var(--destructive);
+  --color-input: var(--input);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-height: 100vh;
+    background-color: var(--surface);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: var(--brand-200);
+    color: var(--navy-950);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .shell-container {
+    width: min(100% - 2rem, 80rem);
+    margin-inline: auto;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    padding: 0.7rem 1.35rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.2;
+    transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease,
+      transform 150ms ease;
+    white-space: nowrap;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .btn-primary {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--primary-hover);
+  }
+
+  .btn-secondary {
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--accent-hover);
+  }
+
+  .btn-outline {
+    border: 1px solid var(--border);
+    background-color: transparent;
+    color: var(--foreground);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  .card {
+    border: 1px solid var(--border);
+    border-radius: 1.25rem;
+    background-color: var(--surface-raised);
+    box-shadow: var(--shadow-card);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-radius: 9999px;
+    background-color: var(--primary-soft);
+    color: var(--primary);
+    padding: 0.3rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  .section-eyebrow {
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .icon-button {
+    display: inline-flex;
+    height: 2.5rem;
+    width: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    color: var(--foreground);
+    transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+  }
+
+  .icon-button:hover {
+    border-color: var(--primary);
+    background-color: var(--primary-soft);
+    color: var(--primary);
+  }
+}
